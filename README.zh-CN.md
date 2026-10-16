@@ -230,6 +230,11 @@ docker run -d \
   - `SIYUAN_OIDC_ALLOW_ALL`：明确授予提供商认证的所有身份 SiYuan 管理员权限
   - `SIYUAN_OIDC_CLAIM_RULES`：禁用 allow-all 时使用的声明规则 JSON 数组，例如 `[{"claim":"email","operator":"equals","values":["user@example.com"]},{"claim":"email_verified","operator":"equals","values":["true"]}]`；规则内取值为 OR，规则之间为 AND
   - 原生移动应用使用固定的回调 URI `siyuan:/oidc-callback`；请按原样注册。移动端配置在保存前会使用该回调进行校验。自定义提供商、Microsoft 和 GitHub 仅在其应用注册接受该回调 URI 时可用；Google 的 Android 客户端类型不接受该私有 URI，因此 Google 登录仅限浏览器和桌面端流程
+- 可选的请求防护，默认关闭。设置 `SIYUAN_GUARD_ENABLED=true` 后，在内核 API 前增加按 IP 限流、IP 白名单和黑名单、自动封禁以及查询参数攻击检测。不会扫描请求体，因此笔记、资源和同步载荷不受影响。来自 `127.0.0.1` 和 `::1` 的请求不受限制，仅当 `X-Forwarded-For` 由回环地址上的代理发送时才会被采信
+  - `SIYUAN_GUARD_RATE_LIMIT`：每个窗口内每个 IP 允许的请求数（可选，默认 `600`）
+  - `SIYUAN_GUARD_RATE_WINDOW`：窗口长度，单位为秒（可选，默认 `60`）
+  - `SIYUAN_GUARD_ALLOW_IPS`：以逗号或空格分隔的 IP 或 CIDR；设置后其他地址将被拒绝并返回 403
+  - `SIYUAN_GUARD_DENY_IPS`：以逗号或空格分隔的 IP 或 CIDR，始终返回 403
 - `SIYUAN_LANG`：界面语言（可选，Docker 下未设置时默认为 `en`）。接受 BCP 47 标签如 `zh-CN`/`zh-TW`/`en`/`ja`/`pt-BR`；旧下划线值如 `zh_CN`/`en_US` 也兼容。若希望**设置**中选择的语言在重启后仍生效，部署时请去掉该变量；若设置了，每次启动都会应用该值并覆盖已保存的语言设置
   - 也可通过 `--lang` 命令行参数设置。如果两者都设置了，命令行的值将优先
 

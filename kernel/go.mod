@@ -66,6 +66,8 @@ require (
 	github.com/pkoukk/tiktoken-go-loader v0.0.2
 	github.com/r3labs/sse/v2 v2.10.0
 	github.com/radovskyb/watcher v1.0.7
+	github.com/rennf93/gin-guard v1.5.0
+	github.com/rennf93/guard-core-go/v4 v4.4.0
 	github.com/richardlehane/mscfb v1.0.7
 	github.com/rqlite/sql v0.0.0-20260224021119-1b2524a41372
 	github.com/sabhiram/go-gitignore v0.0.0-20210923224102-525f6e181f06
@@ -91,11 +93,11 @@ require (
 	github.com/xrash/smetrics v0.0.0-20250705151800-55b8f293f342
 	github.com/xuri/excelize/v2 v2.11.0
 	golang.org/x/mobile v0.0.0-20251209145715-2553ed8ce294
-	golang.org/x/mod v0.40.0
-	golang.org/x/net v0.58.0
-	golang.org/x/sync v0.22.0
-	golang.org/x/sys v0.47.0
-	golang.org/x/text v0.41.0
+	golang.org/x/mod v0.41.0
+	golang.org/x/net v0.60.0
+	golang.org/x/sync v0.23.0
+	golang.org/x/sys v0.48.0
+	golang.org/x/text v0.42.0
 	golang.org/x/time v0.15.0
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -111,7 +113,10 @@ require (
 	github.com/olekukonko/cat v0.0.0-20250911104152-50322a0618f6 // indirect
 	github.com/olekukonko/errors v1.3.0 // indirect
 	github.com/olekukonko/ll v0.1.8 // indirect
+	github.com/oschwald/maxminddb-golang v1.13.1 // indirect
+	github.com/redis/go-redis/v9 v9.23.0 // indirect
 	go.mongodb.org/mongo-driver/v2 v2.8.0 // indirect
+	go.uber.org/atomic v1.12.0 // indirect
 )
 
 require (
@@ -227,7 +232,7 @@ require (
 	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	golang.org/x/arch v0.30.0 // indirect
-	golang.org/x/crypto v0.55.0
+	golang.org/x/crypto v0.57.0
 	golang.org/x/image v0.45.0
 	golang.org/x/oauth2 v0.36.0
 	golang.org/x/tools v0.49.0 // indirect

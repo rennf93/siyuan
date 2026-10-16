@@ -149,6 +149,14 @@ func Serve(fastMode bool, cookieKey string) {
 	ginServer.ForwardedByClientIP = true
 	ginServer.RemoteIPHeaders = []string{"X-Forwarded-For"}
 	ginServer.MaxMultipartMemory = 1024 * 1024 * 32 // 插入较大的资源文件时内存占用较大 https://github.com/siyuan-note/siyuan/issues/5023
+	if guardEnabled(os.Getenv) {
+		// 可选的请求防护，默认关闭。置于请求串行化之前，被拒绝的请求不排队；CORS 在其外层，拒绝响应仍携带 CORS 头
+		guard, err := guardMiddleware(os.Getenv)
+		if err != nil {
+			logging.LogFatalf(logging.ExitCodeSecurityRisk, "init request guard failed: %s", err)
+		}
+		ginServer.Use(corsMiddleware(), guard)
+	}
 	ginServer.Use(
 		model.ControlConcurrency, // 请求串行化 Concurrency control when requesting the kernel API https://github.com/siyuan-note/siyuan/issues/9939
 		model.Timing,
